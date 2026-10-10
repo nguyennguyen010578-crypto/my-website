@@ -7,8 +7,49 @@
     <style>
         :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --primary: #38bdf8; }
         body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        header { background: #1e293b; padding: 20px; text-align: center; border-bottom: 2px solid var(--primary); }
+        
+        /* Header với nút chuyển ngôn ngữ */
+        header { 
+            background: #1e293b; 
+            padding: 25px 20px; 
+            text-align: center; 
+            border-bottom: 2px solid var(--primary); 
+            position: relative;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #334155;
+            border: 1px solid var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .lang-switch:hover {
+            background: var(--primary);
+            color: #0f172a;
+        }
+
         h1 { color: var(--primary); margin: 0 0 10px 0; }
+        
+        /* Thẻ thông báo Trang web này do một cá nhân người Việt thành lập */
+        .badge-vn {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         
@@ -35,6 +76,25 @@
         }
         .card h3 { color: var(--primary); margin-top: 0; }
 
+        /* Thẻ aftercode nổi bật ở cuối */
+        .card-link.large-card {
+            grid-column: 1 / -1;
+        }
+        .card-link.large-card .card {
+            padding: 30px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 2px solid var(--primary);
+            text-align: center;
+        }
+        .card-link.large-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        .card-link.large-card p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
         form { display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 20px auto 0; }
         label { display: flex; flex-direction: column; gap: 5px; font-weight: 500; color: var(--primary); }
         input, textarea { padding: 12px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: white; font-family: inherit; }
@@ -45,66 +105,209 @@
 </head>
 <body>
     <header>
-        <h1>WELCOME TO MY WEBSITE</h1>
-        <p>Trang web cá nhân được tạo bằng HTML, CSS và JavaScript</p>
+        <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">🌐 English</button>
+        <h1 id="headerTitle">WELCOME TO MY WEBSITE</h1>
+        <p id="headerSub">Trang web cá nhân được tạo bằng HTML, CSS và JavaScript</p>
+        <div>
+            <span class="badge-vn" id="vnBadge">🇻🇳 Trang web này do một cá nhân người Việt thành lập</span>
+        </div>
     </header>
 
     <div class="container">
-        <h2>Dịch Vụ & Giới Thiệu</h2>
+        <h2 id="servicesTitle">Dịch Vụ & Giới Thiệu</h2>
         <div class="grid">
+            <!-- Thẻ Thiết Kế Web -->
             <a href="https://github.com" target="_blank" class="card-link">
                 <div class="card">
-                    <h3>Thiết Kế Web 🔗</h3>
-                    <p>Tạo giao diện trang web hiện đại, nhanh chóng. (Bấm vào để sang trang chủ GitHub)</p>
+                    <h3 id="card1Title">Thiết Kế Web 🔗</h3>
+                    <p id="card1Desc">Tạo giao diện trang web hiện đại, nhanh chóng. (Bấm vào để sang trang chủ GitHub)</p>
                 </div>
             </a>
 
+            <!-- Thẻ Lập Trình JavaScript -->
             <a href="https://www.w3schools.com/js/tryit.asp?filename=tryjs_intro_inner_html" target="_blank" class="card-link">
                 <div class="card">
-                    <h3>Lập Trình JavaScript 🔗</h3>
-                    <p>Xử lý tính năng và sự kiện mượt mà. (Bấm vào để thử nghiệm mã JavaScript)</p>
+                    <h3 id="card2Title">Lập Trình JavaScript 🔗</h3>
+                    <p id="card2Desc">Xử lý tính năng và sự kiện mượt mà. (Bấm vào để thử nghiệm mã JavaScript)</p>
                 </div>
             </a>
             
+            <!-- Thẻ Tối Ưu SEO -->
             <a href="https://developers.google.com/search" target="_blank" class="card-link">
                 <div class="card">
-                    <h3>Tối Ưu SEO 🔗</h3>
-                    <p>Giúp trang web hiển thị chuẩn xác và thu hút người dùng. (Bấm vào để xem tài liệu SEO)</p>
+                    <h3 id="card3Title">Tối Ưu SEO 🔗</h3>
+                    <p id="card3Desc">Giúp trang web hiển thị chuẩn xác và thu hút người dùng. (Bấm vào xem tài liệu SEO)</p>
+                </div>
+            </a>
+
+            <!-- Thẻ DANVworkshop -->
+            <a href="https://turboshare.org.uk/users/kietgame123" target="_blank" class="card-link">
+                <div class="card">
+                    <h3 id="card4Title">DANVworkshop 🔗</h3>
+                    <p id="card4Desc">Ghé thăm trang cá nhân kietgame123 trên DANVworkshop TurboShare.</p>
+                </div>
+            </a>
+
+            <!-- Thẻ scratch -->
+            <a href="https://scratch.mit.edu/users/kietgame123clone/" target="_blank" class="card-link">
+                <div class="card">
+                    <h3 id="card5Title">scratch 🔗</h3>
+                    <p id="card5Desc">Khám phá trang dự án Scratch của kietgame123clone.</p>
+                </div>
+            </a>
+
+            <!-- Thẻ penguinmod -->
+            <a href="https://penguinmod.com/profile/?user=kietgame123clone" target="_blank" class="card-link">
+                <div class="card">
+                    <h3 id="card6Title">penguinmod 🔗</h3>
+                    <p id="card6Desc">Xem hồ sơ cá nhân của kietgame123clone trên PenguinMod.</p>
+                </div>
+            </a>
+
+            <!-- Thẻ aftercode ở cuối (kích thước lớn nhất) -->
+            <a href="https://aftercode-web-wheat.vercel.app/" target="_blank" class="card-link large-card">
+                <div class="card">
+                    <h3 id="card7Title">aftercode 🔗</h3>
+                    <p id="card7Desc">Trải nghiệm ứng dụng và tạo các dự án độc đáo tại aftercode.</p>
                 </div>
             </a>
         </div>
 
-        <h2 style="text-align: center; margin-top: 50px;">Gửi Tin Nhắn</h2>
+        <h2 style="text-align: center; margin-top: 50px;" id="contactTitle">Gửi Tin Nhắn</h2>
         
-        <!-- Form liên hệ tích hợp Formspree của bạn -->
+        <!-- Form liên hệ Formspree -->
         <form action="https://formspree.io/f/meaekako" method="POST" id="contactForm">
-            <label>
-                Họ và tên của bạn:
-                <input type="text" name="name" required placeholder="Nhập tên của bạn...">
+            <label id="lblNameText">Họ và tên của bạn:
+                <input type="text" name="name" id="inputName" required placeholder="Nhập tên của bạn...">
             </label>
-            <label>
-                Địa chỉ Email:
-                <input type="email" name="email" required placeholder="nguyennguyen010578@gmail.com">
+            <label id="lblEmailText">Địa chỉ Email:
+                <input type="email" name="email" id="inputEmail" required placeholder="nguyennguyen010578@gmail.com">
             </label>
-            <label>
-                Nội dung tin nhắn:
-                <textarea name="message" rows="4" required placeholder="Nội dung tin nhắn..."></textarea>
+            <label id="lblMsgText">Nội dung tin nhắn:
+                <textarea name="message" id="inputMsg" rows="4" required placeholder="Nội dung tin nhắn..."></textarea>
             </label>
-            <button type="submit">Gửi Tin Nhắn</button>
+            <button type="submit" id="btnSubmit">Gửi Tin Nhắn</button>
         </form>
         <p id="status" style="text-align: center; color: #4ade80; font-weight: bold; margin-top: 15px;"></p>
     </div>
 
     <footer>
-        <p>© 2026 Website Cá Nhân</p>
+        <p id="footerTxt">© 2026 Website Cá Nhân</p>
     </footer>
 
     <script>
-        // Xử lý gửi form mượt mà qua AJAX không bị chuyển trang
+        const translations = {
+            vi: {
+                langBtn: "🌐 English",
+                headerTitle: "WELCOME TO MY WEBSITE",
+                headerSub: "Trang web cá nhân được tạo bằng HTML, CSS và JavaScript",
+                vnBadge: "🇻🇳 Trang web này do một cá nhân người Việt thành lập",
+                servicesTitle: "Dịch Vụ & Giới Thiệu",
+                card1Title: "Thiết Kế Web 🔗",
+                card1Desc: "Tạo giao diện trang web hiện đại, nhanh chóng. (Bấm vào để sang trang chủ GitHub)",
+                card2Title: "Lập Trình JavaScript 🔗",
+                card2Desc: "Xử lý tính năng và sự kiện mượt mà. (Bấm vào để thử nghiệm mã JavaScript)",
+                card3Title: "Tối Ưu SEO 🔗",
+                card3Desc: "Giúp trang web hiển thị chuẩn xác và thu hút người dùng. (Bấm vào xem tài liệu SEO)",
+                card4Title: "DANVworkshop 🔗",
+                card4Desc: "Ghé thăm trang cá nhân kietgame123 trên DANVworkshop TurboShare.",
+                card5Title: "scratch 🔗",
+                card5Desc: "Khám phá trang dự án Scratch của kietgame123clone trên PenguinMod.",
+                card6Title: "penguinmod 🔗",
+                card6Desc: "Xem hồ sơ cá nhân của kietgame123clone ",
+                card7Title: "aftercode 🔗",
+                card7Desc: "Trải nghiệm ứng dụng và tạo các dự án độc đáo tại aftercode.",
+                contactTitle: "Gửi Tin Nhắn",
+                lblNameText: "Họ và tên của bạn:",
+                inputName: "Nhập tên của bạn...",
+                lblEmailText: "Địa chỉ Email:",
+                lblMsgText: "Nội dung tin nhắn:",
+                inputMsg: "Nội dung tin nhắn...",
+                btnSubmit: "Gửi Tin Nhắn",
+                footerTxt: "© 2026 Website Cá Nhân",
+                msgSuccess: "Tin nhắn đã được gửi thành công về email của bạn!",
+                msgError: "Có lỗi xảy ra, vui lòng thử lại sau!",
+                msgNetwork: "Lỗi kết nối, vui lòng kiểm tra lại mạng!"
+            },
+            en: {
+                langBtn: "🌐 Tiếng Việt",
+                headerTitle: "WELCOME TO MY WEBSITE",
+                headerSub: "A personal website built with HTML, CSS, and JavaScript",
+                vnBadge: "🇻🇳 This website was created by a Vietnamese",
+                servicesTitle: "Services & Introduction",
+                card1Title: "Web Design 🔗",
+                card1Desc: "Create modern and fast website interfaces. (Click to visit GitHub)",
+                card2Title: "JavaScript Programming 🔗",
+                card2Desc: "Handle interactive features smoothly. (Click to try JavaScript code)",
+                card3Title: "SEO Optimization 🔗",
+                card3Desc: "Help websites rank accurately and attract users. (Click for SEO docs)",
+                card4Title: "DANVworkshop 🔗",
+                card4Desc: "Visit the kietgame123 profile on DANVworshop TurboShare.",
+                card5Title: "scratch 🔗",
+                card5Desc: "Explore the Scratch project page of kietgame123clone.",
+                card6Title: "penguinmod 🔗",
+                card6Desc: "View the kietgame123clone profile on PenguinMod.",
+                card7Title: "aftercode 🔗",
+                card7Desc: "Experience apps and create unique projects at aftercode.",
+                contactTitle: "Send a Message",
+                lblNameText: "Your Name:",
+                inputName: "Enter your name...",
+                lblEmailText: "Email Address:",
+                lblMsgText: "Message:",
+                inputMsg: "Type your message here...",
+                btnSubmit: "Send Message",
+                footerTxt: "© 2026 Personal Website",
+                msgSuccess: "Message successfully sent to email!",
+                msgError: "An error occurred, please try again later!",
+                msgNetwork: "Network error, please check your connection!"
+            }
+        };
+
+        let currentLang = 'vi';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'vi' ? 'en' : 'vi';
+            const lang = translations[currentLang];
+
+            document.getElementById('langBtn').innerText = lang.langBtn;
+            document.getElementById('headerTitle').innerText = lang.headerTitle;
+            document.getElementById('headerSub').innerText = lang.headerSub;
+            document.getElementById('vnBadge').innerText = lang.vnBadge;
+            document.getElementById('servicesTitle').innerText = lang.servicesTitle;
+            
+            document.getElementById('card1Title').innerText = lang.card1Title;
+            document.getElementById('card1Desc').innerText = lang.card1Desc;
+            document.getElementById('card2Title').innerText = lang.card2Title;
+            document.getElementById('card2Desc').innerText = lang.card2Desc;
+            document.getElementById('card3Title').innerText = lang.card3Title;
+            document.getElementById('card3Desc').innerText = lang.card3Desc;
+            
+            document.getElementById('card4Title').innerText = lang.card4Title;
+            document.getElementById('card4Desc').innerText = lang.card4Desc;
+            document.getElementById('card5Title').innerText = lang.card5Title;
+            document.getElementById('card5Desc').innerText = lang.card5Desc;
+            document.getElementById('card6Title').innerText = lang.card6Title;
+            document.getElementById('card6Desc').innerText = lang.card6Desc;
+            document.getElementById('card7Title').innerText = lang.card7Title;
+            document.getElementById('card7Desc').innerText = lang.card7Desc;
+
+            document.getElementById('contactTitle').innerText = lang.contactTitle;
+            
+            document.getElementById('lblNameText').firstChild.nodeValue = lang.lblNameText + " ";
+            document.getElementById('inputName').placeholder = lang.inputName;
+            document.getElementById('lblEmailText').firstChild.nodeValue = lang.lblEmailText + " ";
+            document.getElementById('lblMsgText').firstChild.nodeValue = lang.lblMsgText + " ";
+            document.getElementById('inputMsg').placeholder = lang.inputMsg;
+            document.getElementById('btnSubmit').innerText = lang.btnSubmit;
+            
+            document.getElementById('footerTxt').innerText = lang.footerTxt;
+        }
+
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
             const data = new FormData(form);
+            const lang = translations[currentLang];
             
             fetch(form.action, {
                 method: form.method,
@@ -112,15 +315,16 @@
                 headers: { 'Accept': 'json' }
             }).then(response => {
                 if (response.ok) {
-                    document.getElementById('status').innerText = 'Tin nhắn đã được gửi thành công về email của bạn!';
+                    document.getElementById('status').style.color = '#4ade80';
+                    document.getElementById('status').innerText = lang.msgSuccess;
                     form.reset();
                 } else {
                     document.getElementById('status').style.color = '#f87171';
-                    document.getElementById('status').innerText = 'Có lỗi xảy ra, vui lòng thử lại sau!';
+                    document.getElementById('status').innerText = lang.msgError;
                 }
             }).catch(error => {
                 document.getElementById('status').style.color = '#f87171';
-                document.getElementById('status').innerText = 'Lỗi kết nối, vui lòng kiểm tra lại mạng!';
+                document.getElementById('status').innerText = lang.msgNetwork;
             });
         });
     </script>
