@@ -146,8 +146,8 @@
             <!-- Thẻ DANVworkshop -->
             <a href="https://turboshare.org.uk/users/kietgame123" target="_blank" class="card-link">
                 <div class="card">
-                    <h3 id="card4Title">DANVworkshop 🔗</h3>
-                    <p id="card4Desc">Ghé thăm trang cá nhân kietgame123 trên DANVworkshop TurboShare.</p>
+                    <h3 id="card4Title">TURBOShare 🔗</h3>
+                    <p id="card4Desc">Ghé thăm trang cá nhân kietgame123 trên TurboShare.</p>
                 </div>
             </a>
 
@@ -163,7 +163,7 @@
             <a href="https://penguinmod.com/profile/?user=kietgame123clone" target="_blank" class="card-link">
                 <div class="card">
                     <h3 id="card6Title">penguinmod 🔗</h3>
-                    <p id="card6Desc">Xem hồ sơ cá nhân của kietgame123clone </p>
+                    <p id="card6Desc">Xem hồ sơ cá nhân của kietgame123clone</p>
                 </div>
             </a>
 
@@ -213,11 +213,11 @@
                 card3Title: "Tối Ưu SEO 🔗",
                 card3Desc: "Giúp trang web hiển thị chuẩn xác và thu hút người dùng. (Bấm vào xem tài liệu SEO)",
                 card4Title: "DANVworkshop 🔗",
-                card4Desc: "Ghé thăm trang cá nhân kietgame123 trên DANVworkshop TurboShare.",
+                card4Desc: "Ghé thăm trang cá nhân kietgame123 trên TurboShare.",
                 card5Title: "scratch 🔗",
                 card5Desc: "Khám phá trang dự án Scratch của kietgame123clone trên PenguinMod.",
                 card6Title: "penguinmod 🔗",
-                card6Desc: "Xem hồ sơ cá nhân của kietgame123clone ",
+                card6Desc: "Xem hồ sơ cá nhân của kietgame123clone",
                 card7Title: "aftercode 🔗",
                 card7Desc: "Trải nghiệm ứng dụng và tạo các dự án độc đáo tại aftercode.",
                 contactTitle: "Gửi Tin Nhắn",
@@ -245,7 +245,7 @@
                 card3Title: "SEO Optimization 🔗",
                 card3Desc: "Help websites rank accurately and attract users. (Click for SEO docs)",
                 card4Title: "DANVworkshop 🔗",
-                card4Desc: "Visit the kietgame123 profile on DANVworshop TurboShare.",
+                card4Desc: "Visit the kietgame123 profile on TurboShare.",
                 card5Title: "scratch 🔗",
                 card5Desc: "Explore the Scratch project page of kietgame123clone.",
                 card6Title: "penguinmod 🔗",
@@ -256,4 +256,80 @@
                 lblNameText: "Your Name:",
                 inputName: "Enter your name...",
                 lblEmailText: "Email Address:",
-                lblMsg
+                lblMsgText: "Message:",
+                inputMsg: "Type your message here...",
+                btnSubmit: "Send Message",
+                footerTxt: "© 2026 Personal Website",
+                msgSuccess: "Message successfully sent to email!",
+                msgError: "An error occurred, please try again later!",
+                msgNetwork: "Network error, please check your connection!"
+            }
+        };
+
+        let currentLang = 'vi';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'vi' ? 'en' : 'vi';
+            const lang = translations[currentLang];
+
+            document.getElementById('langBtn').innerText = lang.langBtn;
+            document.getElementById('headerTitle').innerText = lang.headerTitle;
+            document.getElementById('headerSub').innerText = lang.headerSub;
+            document.getElementById('vnBadge').innerText = lang.vnBadge;
+            document.getElementById('servicesTitle').innerText = lang.servicesTitle;
+            
+            document.getElementById('card1Title').innerText = lang.card1Title;
+            document.getElementById('card1Desc').innerText = lang.card1Desc;
+            document.getElementById('card2Title').innerText = lang.card2Title;
+            document.getElementById('card2Desc').innerText = lang.card2Desc;
+            document.getElementById('card3Title').innerText = lang.card3Title;
+            document.getElementById('card3Desc').innerText = lang.card3Desc;
+            
+            document.getElementById('card4Title').innerText = lang.card4Title;
+            document.getElementById('card4Desc').innerText = lang.card4Desc;
+            document.getElementById('card5Title').innerText = lang.card5Title;
+            document.getElementById('card5Desc').innerText = lang.card5Desc;
+            document.getElementById('card6Title').innerText = lang.card6Title;
+            document.getElementById('card6Desc').innerText = lang.card6Desc;
+            document.getElementById('card7Title').innerText = lang.card7Title;
+            document.getElementById('card7Desc').innerText = lang.card7Desc;
+
+            document.getElementById('contactTitle').innerText = lang.contactTitle;
+            
+            document.getElementById('lblNameText').firstChild.nodeValue = lang.lblNameText + " ";
+            document.getElementById('inputName').placeholder = lang.inputName;
+            document.getElementById('lblEmailText').firstChild.nodeValue = lang.lblEmailText + " ";
+            document.getElementById('lblMsgText').firstChild.nodeValue = lang.lblMsgText + " ";
+            document.getElementById('inputMsg').placeholder = lang.inputMsg;
+            document.getElementById('btnSubmit').innerText = lang.btnSubmit;
+            
+            document.getElementById('footerTxt').innerText = lang.footerTxt;
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+            const lang = translations[currentLang];
+            
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'json' }
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById('status').style.color = '#4ade80';
+                    document.getElementById('status').innerText = lang.msgSuccess;
+                    form.reset();
+                } else {
+                    document.getElementById('status').style.color = '#f87171';
+                    document.getElementById('status').innerText = lang.msgError;
+                }
+            }).catch(error => {
+                document.getElementById('status').style.color = '#f87171';
+                document.getElementById('status').innerText = lang.msgNetwork;
+            });
+        });
+    </script>
+</body>
+</html>
